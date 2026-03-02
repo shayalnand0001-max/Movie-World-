@@ -1,0 +1,21 @@
+<script>
+async function startFight() {
+    const fighter1 = document.getElementById('fighter1').value;
+    const fighter2 = document.getElementById('fighter2').value;
+    const prompt = `4K Cinematic fight: ${fighter1} vs ${fighter2}, high action, slow motion`;
+
+    // Replace this with YOUR private Hugging Face API link
+    const my_private_ai = "https://your-username-wan-2-1.hf.space/run/predict";
+
+    document.getElementById('status').innerText = "AI is rendering the battle...";
+
+    const response = await fetch(my_private_ai, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ data: [prompt] })
+    });
+
+    const result = await response.json();
+    document.getElementById('videoPlayer').src = result.data[0].video.url;
+}
+</script>
